@@ -8,15 +8,20 @@ export default function GuideProfilePage() {
   const [guide, setGuide] = useState<GuideDetail | null>(null);
 
   useEffect(() => {
-    if (id) getGuideById(id).then(setGuide).catch(console.error);
+    if (id) {
+      getGuideById(id)
+        .then(setGuide)
+        .catch(console.error);
+    }
   }, [id]);
 
-  if (!guide)
+  if (!guide) {
     return (
       <div className="min-h-screen flex items-center justify-center text-gray-600">
         Cargando guía...
       </div>
     );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -55,13 +60,18 @@ export default function GuideProfilePage() {
                   {guide.ratingAvg != null && (
                     <div className="flex items-center text-gray-800 mt-2">
                       <FaStar className="text-black mr-1" />
-                      <span className="font-medium">{guide.ratingAvg.toFixed(1)}</span>
+                      <span className="font-medium">
+                        {guide.ratingAvg.toFixed(1)}
+                      </span>
                     </div>
                   )}
                   <div className="flex flex-wrap gap-2 mt-3">
                     {guide.languages.map((lang, idx) => (
-                      <div key={idx} className="flex items-center gap-2 border border-black rounded-md px-3 py-1">
-                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2 border border-black rounded-md px-3 py-1"
+                      >
+                        <span className="w-2 h-2 bg-green-500 rounded-full" />
                         {lang.name} ({lang.code.toUpperCase()})
                       </div>
                     ))}
@@ -72,7 +82,9 @@ export default function GuideProfilePage() {
 
             {/* Bio */}
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-900 mb-2">Sobre mí</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                Sobre mí
+              </h2>
               <p className="text-gray-700 leading-relaxed">{guide.bio}</p>
             </div>
           </div>
@@ -82,20 +94,15 @@ export default function GuideProfilePage() {
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
               <p className="text-sm text-gray-600">Desde</p>
               <h3 className="text-2xl font-bold text-gray-900">
-                S/ 55 <span className="text-base font-normal text-gray-600">/hora</span>
+                S/ 55{" "}
+                <span className="text-base font-normal text-gray-600">
+                  /hora
+                </span>
               </h3>
-              {guide.createdAt && (
-                <p className="text-gray-600 text-sm mt-4">
-                  Miembro desde{" "}
-                  {new Date(guide.createdAt).toLocaleDateString("es-PE", {
-                    year: "numeric",
-                    month: "long",
-                  })}
-                </p>
-              )}
+
               <Link
                 to={`/reservations/new/${guide.id}`}
-                className="mt-6 w-full inline-block text-center bg-black text-white py-2.5 rounded-md"
+                className="mt-6 w-full inline-block text-center bg-black text-white py-2.5 rounded-md hover:bg-gray-900 transition"
               >
                 Reservar ahora
               </Link>
