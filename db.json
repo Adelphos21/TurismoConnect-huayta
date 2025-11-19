@@ -1,0 +1,318 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "first_name": "Lucas",
+      "last_name": "Fernández",
+      "username": "lucasf",
+      "correo": "lucas.fernandez@email.com",
+      "contraseña": "Pass1234!"
+    },
+    {
+      "id": "2",
+      "first_name": "Valeria",
+      "last_name": "Gómez",
+      "username": "valeg",
+      "correo": "valeria.gomez@email.com",
+      "contraseña": "Secure456#"
+    },
+    {
+      "id": "3",
+      "first_name": "Mateo",
+      "last_name": "Ramírez",
+      "username": "matram",
+      "correo": "mateo.ramirez@email.com",
+      "contraseña": "MyPass789$"
+    },
+    {
+      "id": "4",
+      "first_name": "Camila",
+      "last_name": "Torres",
+      "username": "cami_t",
+      "correo": "camila.torres@email.com",
+      "contraseña": "Cami2025!"
+    },
+    {
+      "id": "5",
+      "first_name": "Diego",
+      "last_name": "Mendoza",
+      "username": "diegom",
+      "correo": "diego.mendoza@email.com",
+      "contraseña": "Diego#123"
+    }
+  ],
+  "guides": [
+    {
+      "id": "1",
+      "nombres": "Carlos",
+      "apellidos": "Pérez",
+      "dni": "12345678",
+      "bio": "Apasionado por la historia y la cultura local.",
+      "city": "Lima",
+      "country": "Perú",
+      "certification": true,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Inglés",
+          "nivel": "Intermedio"
+        }
+      ],
+      "correo": "carlos.perez@email.com"
+    },
+    {
+      "id": "2",
+      "nombres": "María",
+      "apellidos": "Gómez",
+      "dni": "87654321",
+      "bio": "Guía con experiencia en tours gastronómicos.",
+      "city": "Cusco",
+      "country": "Perú",
+      "certification": true,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Francés",
+          "nivel": "Básico"
+        }
+      ],
+      "correo": "maria.gomez@email.com"
+    },
+    {
+      "id": "3",
+      "nombres": "Luis",
+      "apellidos": "Ramírez",
+      "dni": "23456789",
+      "bio": "Especialista en turismo de aventura.",
+      "city": "Arequipa",
+      "country": "Perú",
+      "certification": false,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Inglés",
+          "nivel": "Avanzado"
+        }
+      ],
+      "correo": "luis.ramirez@email.com"
+    },
+    {
+      "id": "4",
+      "nombres": "Ana",
+      "apellidos": "Torres",
+      "dni": "34567890",
+      "bio": "Experta en rutas arqueológicas y culturales.",
+      "city": "Trujillo",
+      "country": "Perú",
+      "certification": true,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Alemán",
+          "nivel": "Intermedio"
+        }
+      ],
+      "correo": "ana.torres@email.com"
+    },
+    {
+      "id": "5",
+      "nombres": "Jorge",
+      "apellidos": "Vega",
+      "dni": "45678901",
+      "bio": "Guía de turismo ecológico y de naturaleza.",
+      "city": "Iquitos",
+      "country": "Perú",
+      "certification": false,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Inglés",
+          "nivel": "Intermedio"
+        }
+      ],
+      "correo": "jorge.vega@email.com"
+    },
+    {
+      "id": "6",
+      "nombres": "Lucía",
+      "apellidos": "Flores",
+      "dni": "56789012",
+      "bio": "Apasionada por la historia del arte y museos.",
+      "city": "Lima",
+      "country": "Perú",
+      "certification": true,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Italiano",
+          "nivel": "Básico"
+        }
+      ],
+      "correo": "lucia.flores@email.com"
+    },
+    {
+      "id": "7",
+      "nombres": "Miguel",
+      "apellidos": "Sánchez",
+      "dni": "67890123",
+      "bio": "Guía especializado en tours nocturnos y culturales.",
+      "city": "Arequipa",
+      "country": "Perú",
+      "certification": true,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Inglés",
+          "nivel": "Avanzado"
+        }
+      ],
+      "correo": "miguel.sanchez@email.com"
+    },
+    {
+      "id": "8",
+      "nombres": "Sofía",
+      "apellidos": "Rojas",
+      "dni": "78901234",
+      "bio": "Guía con experiencia en turismo gastronómico y de vinos.",
+      "city": "Cusco",
+      "country": "Perú",
+      "certification": true,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Francés",
+          "nivel": "Intermedio"
+        }
+      ],
+      "correo": "sofia.rojas@email.com"
+    },
+    {
+      "id": "9",
+      "nombres": "Diego",
+      "apellidos": "Mendoza",
+      "dni": "89012345",
+      "bio": "Amante del trekking y la aventura en montaña.",
+      "city": "Huaraz",
+      "country": "Perú",
+      "certification": false,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Inglés",
+          "nivel": "Intermedio"
+        }
+      ],
+      "correo": "diego.mendoza@email.com"
+    },
+    {
+      "id": "10",
+      "nombres": "Elena",
+      "apellidos": "Castillo",
+      "dni": "90123456",
+      "bio": "Especialista en tours culturales y patrimoniales.",
+      "city": "Arequipa",
+      "country": "Perú",
+      "certification": true,
+      "languages": [
+        {
+          "idioma": "Español",
+          "nivel": "Avanzado"
+        },
+        {
+          "idioma": "Portugués",
+          "nivel": "Básico"
+        }
+      ],
+      "correo": "elena.castillo@email.com"
+    },
+    {
+      "name": "paco pepe",
+      "city": "Callao",
+      "id": "k2eMWys"
+    }
+  ],
+  "reservations": [
+    {
+      "user_id": "1",
+      "guide_id": "1",
+      "fecha_reserva": "2025-10-05T10:00:00Z",
+      "fecha_servicio": "2025-10-10T09:00:00Z",
+      "duracion_horas": 3,
+      "precio_total": 150,
+      "estado": "confirmado",
+      "comentario": "Tour histórico en Lima",
+      "fecha_creacion": "2025-10-05T09:30:00Z"
+    },
+    {
+      "user_id": "2",
+      "guide_id": "2",
+      "fecha_reserva": "2025-10-06T14:00:00Z",
+      "fecha_servicio": "2025-10-12T10:00:00Z",
+      "duracion_horas": 4,
+      "precio_total": 200,
+      "estado": "pendiente",
+      "comentario": "Tour gastronómico en Cusco",
+      "fecha_creacion": "2025-10-06T13:30:00Z"
+    },
+    {
+      "user_id": "3",
+      "guide_id": "3",
+      "fecha_reserva": "2025-10-07T08:00:00Z",
+      "fecha_servicio": "2025-10-15T07:30:00Z",
+      "duracion_horas": 5,
+      "precio_total": 250,
+      "estado": "confirmado",
+      "comentario": "Excursión de aventura en Arequipa",
+      "fecha_creacion": "2025-10-07T07:45:00Z"
+    },
+    {
+      "user_id": "4",
+      "guide_id": "4",
+      "fecha_reserva": "2025-10-08T12:00:00Z",
+      "fecha_servicio": "2025-10-14T11:00:00Z",
+      "duracion_horas": 3,
+      "precio_total": 180,
+      "estado": "cancelado",
+      "comentario": "Ruta arqueológica en Trujillo",
+      "fecha_creacion": "2025-10-08T11:30:00Z"
+    },
+    {
+      "user_id": "5",
+      "guide_id": "5",
+      "fecha_reserva": "2025-10-09T15:00:00Z",
+      "fecha_servicio": "2025-10-16T14:00:00Z",
+      "duracion_horas": 6,
+      "precio_total": 300,
+      "estado": "completado",
+      "comentario": "Tour ecológico en Iquitos",
+      "fecha_creacion": "2025-10-09T14:45:00Z"
+    }
+  ]
+}
