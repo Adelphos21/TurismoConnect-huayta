@@ -42,7 +42,16 @@ export interface GuideProfile {
   certification?: boolean;
   ratingAvg: number;
   languages: GuideLanguage[];
+  createdAt?: string; // <-- agrega esta línea
 }
+
+/** 
+ * Alias de compatibilidad para el código que espera estos nombres:
+ * - GuideDetail → perfil detallado (GuideProfile)
+ * - GuideSearchItem → item de búsqueda/lista (GuideSummary)
+ */
+export type GuideDetail = GuideProfile;
+export type GuideSearchItem = GuideSummary;
 
 /** Crear guía (formulario "Conviértete en guía") */
 export async function createGuide(body: {
@@ -63,7 +72,7 @@ export async function createGuide(body: {
 /** Buscar guías (listado principal de guías) */
 export async function getGuides(params?: {
   city?: string;
-  date?: string;         // YYYY-MM-DD
+  date?: string; // YYYY-MM-DD
   language?: string;
   certification?: boolean;
 }) {

@@ -3,12 +3,20 @@ import { useParams, Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
 import { getGuideById, type GuideDetail } from "servicios/guides";
 
+// si quieres puedes definir un tipo auxiliar para los idiomas:
+type GuideLanguage = {
+  name: string;
+  code: string;
+};
+
 export default function GuideProfilePage() {
   const { id } = useParams<{ id: string }>();
   const [guide, setGuide] = useState<GuideDetail | null>(null);
 
   useEffect(() => {
-    if (id) getGuideById(id).then(setGuide).catch(console.error);
+    if (id) {
+      getGuideById(id).then(setGuide).catch(console.error);
+    }
   }, [id]);
 
   if (!guide)
@@ -55,12 +63,17 @@ export default function GuideProfilePage() {
                   {guide.ratingAvg != null && (
                     <div className="flex items-center text-gray-800 mt-2">
                       <FaStar className="text-black mr-1" />
-                      <span className="font-medium">{guide.ratingAvg.toFixed(1)}</span>
+                      <span className="font-medium">
+                        {guide.ratingAvg.toFixed(1)}
+                      </span>
                     </div>
                   )}
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {guide.languages.map((lang, idx) => (
-                      <div key={idx} className="flex items-center gap-2 border border-black rounded-md px-3 py-1">
+                    {guide.languages.map((lang: GuideLanguage, idx: number) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2 border border-black rounded-md px-3 py-1"
+                      >
                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                         {lang.name} ({lang.code.toUpperCase()})
                       </div>
@@ -72,7 +85,9 @@ export default function GuideProfilePage() {
 
             {/* Bio */}
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-900 mb-2">Sobre mí</h2>
+              <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                Sobre mí
+              </h2>
               <p className="text-gray-700 leading-relaxed">{guide.bio}</p>
             </div>
           </div>
@@ -82,7 +97,10 @@ export default function GuideProfilePage() {
             <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
               <p className="text-sm text-gray-600">Desde</p>
               <h3 className="text-2xl font-bold text-gray-900">
-                S/ 55 <span className="text-base font-normal text-gray-600">/hora</span>
+                S/ 55{" "}
+                <span className="text-base font-normal text-gray-600">
+                  /hora
+                </span>
               </h3>
               {guide.createdAt && (
                 <p className="text-gray-600 text-sm mt-4">
