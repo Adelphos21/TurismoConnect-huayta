@@ -35,7 +35,7 @@ interface SessionState {
 
 const TOKEN_KEY = "auth_token";
 
-export const useSession = create<SessionState>((set) => ({
+export const useSession = create<SessionState>((set, get) => ({
   user: null,
   status: "unknown",
 
