@@ -4,6 +4,9 @@ import { getGuideById, type GuideDetail } from "servicios/guides";
 import { createReservation } from "servicios/reservations";
 import { useSession } from "features/auth/useSession";
 
+// NUEVO
+import { PayPalButtons } from "@paypal/react-paypal-js";
+
 export default function NewReservationPage() {
   const { guideId } = useParams();
   const [guide, setGuide] = useState<GuideDetail | null>(null);
@@ -12,6 +15,9 @@ export default function NewReservationPage() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const { user } = useSession();
+
+  // NUEVO: evita doble click mientras paga
+  const [isPaying, setIsPaying] = useState(false);
 
   useEffect(() => {
     if (guideId) {
@@ -39,6 +45,31 @@ export default function NewReservationPage() {
   const bannerImage =
     (guide && cityImages[guide.city as keyof typeof cityImages]) || defaultImage;
 
+  // NUEVO: función reutilizable para crear reserva luego del pago
+  const confirmarReserva = async () => {
+    if (!user || !guideId) {
+      alert("Debes iniciar sesión para reservar");
+      return;
+    }
+
+    if (!date || !time) {
+      alert("Completa fecha y hora");
+      return;
+    }
+
+    const fechaServicioIso = new Date(`${date}T${time}:00Z`).toISOString();
+
+    await createReservation({
+      user_id: user.id,
+      guide_id: guideId,
+      fecha_servicio: fechaServicioIso,
+      duracion_horas: duracion,
+      precio_total: total,
+      comentario: mensaje,
+    });
+  };
+
+  // Este submit ahora solo valida datos; el pago confirma la reserva
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -52,22 +83,7 @@ export default function NewReservationPage() {
       return;
     }
 
-    const fechaServicioIso = new Date(`${date}T${time}:00Z`).toISOString();
-
-    try {
-      await createReservation({
-        user_id: user.id,
-        guide_id: guideId,
-        fecha_servicio: fechaServicioIso,
-        duracion_horas: duracion,
-        precio_total: total,
-        comentario: mensaje,
-      });
-      alert("Reserva creada correctamente");
-    } catch (err) {
-      console.error(err);
-      alert("Error al crear la reserva");
-    }
+    alert("Datos listos. Ahora realiza el pago con PayPal para confirmar.");
   };
 
   return (
@@ -84,7 +100,9 @@ export default function NewReservationPage() {
           <h1 className="text-3xl md:text-4xl font-bold mb-2">
             {guide?.city ? `Reserva tu experiencia en ${guide.city}` : "Reserva tu experiencia"}
           </h1>
-          <p className="text-lg text-gray-200">Descubre lo mejor de Perú con guías locales certificados</p>
+          <p className="text-lg text-gray-200">
+            Descubre lo mejor de Perú con guías locales certificados
+          </p>
         </div>
       </div>
 
@@ -97,6 +115,7 @@ export default function NewReservationPage() {
             <p className="text-gray-600 mb-6">
               Completa los detalles de tu tour con {guide?.nombres || "tu guía"}.
             </p>
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               {/* Fecha */}
               <label className="flex flex-col">
@@ -148,12 +167,61 @@ export default function NewReservationPage() {
                 />
               </label>
 
+              {/* Botón de validar (no crea reserva) */}
               <button
                 type="submit"
-                className="bg-black text-white py-2 rounded-md mt-4 hover:bg-gray-900 transition"
+                disabled={isPaying}
+                className="bg-black text-white py-2 rounded-md mt-4 hover:bg-gray-900 transition disabled:opacity-60"
               >
-                Confirmar reserva
+                Validar datos
               </button>
+
+              {/* === AQUÍ VA PAYPAL === */}
+              <div className="mt-4">
+                <p className="text-sm text-gray-600 mb-2">
+                  Pago de demostración (Sandbox). No se cobra dinero real.
+                </p>
+
+                <PayPalButtons
+                  style={{ layout: "vertical" }}
+                  // deshabilita si falta algo
+                  disabled={!user || !date || !time || isPaying}
+                  // re-render si cambia el total
+                  forceReRender={[total, duracion]} // patrón recomendado para montos dinámicos :contentReference[oaicite:1]{index=1}
+                  createOrder={(data, actions) => {
+                    return actions.order.create({
+                      purchase_units: [
+                        {
+                          description: `Tour con guía local - ${duracion}h`,
+                          amount: {
+                            value: total.toFixed(2),
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                  onApprove={async (data, actions) => {
+                    if (!actions.order) return;
+
+                    setIsPaying(true);
+                    try {
+                      await actions.order.capture(); // captura sandbox :contentReference[oaicite:2]{index=2}
+                      await confirmarReserva();
+                      alert("Pago aprobado y reserva creada. Merci, monsieur.");
+                    } catch (err) {
+                      console.error(err);
+                      alert("Pago aprobado, pero falló la creación de la reserva.");
+                    } finally {
+                      setIsPaying(false);
+                    }
+                  }}
+                  onError={(err) => {
+                    console.error(err);
+                    alert("Error en el pago demo.");
+                  }}
+                />
+              </div>
+              {/* === FIN PAYPAL === */}
             </form>
           </div>
 
@@ -174,7 +242,9 @@ export default function NewReservationPage() {
                     <p className="font-medium text-gray-800 text-lg">
                       {guide.nombres} {guide.apellidos}
                     </p>
-                    <p className="text-sm text-gray-600">{guide.city}, {guide.country}</p>
+                    <p className="text-sm text-gray-600">
+                      {guide.city}, {guide.country}
+                    </p>
                   </div>
                 </div>
               ) : (
