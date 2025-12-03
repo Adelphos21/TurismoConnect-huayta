@@ -188,9 +188,9 @@ export default function NewReservationPage() {
                   disabled={!user || !date || !time || isPaying}
                   // re-render si cambia el total
                   forceReRender={[total, duracion]} // patrón recomendado para montos dinámicos :contentReference[oaicite:1]{index=1}
-                  createOrder={(data, actions) => {
+                  createOrder={(_data, actions) => {
                     return actions.order.create({
-                      intent: "CAPTURE",
+                       intent: "CAPTURE",
                       purchase_units: [
                         {
                           description: `Tour con guía local - ${duracion}h`,
@@ -202,7 +202,7 @@ export default function NewReservationPage() {
                       ],
                     });
                   }}
-                  onApprove={async (data, actions) => {
+                  onApprove={async (_data, actions) => {
                     if (!actions.order) return;
 
                     setIsPaying(true);
